@@ -441,6 +441,35 @@
     <script>
         // Automatically update the current year
         document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        document.addEventListener("DOMContentLoaded", () => {
+        const categoryTabs = document.querySelectorAll("#categoryTabs .nav-link");
+        const toolItems = document.querySelectorAll(".tool-item");
+
+        categoryTabs.forEach(tab => {
+            tab.addEventListener("click", (event) => {
+                event.preventDefault();
+
+                // Remove 'active' class from all tabs
+                categoryTabs.forEach(tab => tab.classList.remove("active"));
+
+                // Add 'active' class to the clicked tab
+                tab.classList.add("active");
+
+                // Get the selected category
+                const selectedCategory = tab.getAttribute("data-category");
+
+                // Show or hide items based on category
+                toolItems.forEach(item => {
+                    if (selectedCategory === "all" || item.getAttribute("data-category") === selectedCategory) {
+                        item.style.display = "block"; // Show item
+                    } else {
+                        item.style.display = "none"; // Hide item
+                    }
+                });
+            });
+        });
+    });
     </script>
     <!-- Copyright End -->
 
